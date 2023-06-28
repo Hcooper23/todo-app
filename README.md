@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# LAB - Class 31
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project: Context API
 
-## Available Scripts
+### Author: Hayden Cooper
 
-In the project directory, you can run:
+### Problem Domain  
 
-### `npm start`
+In Phase 1, we’re going to perform some refactoring of a Todo application built by another team. This application mixes application state and user settings at the top level and passes things around. It was a good proof of concept, but we need to make this production ready.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    - Create a Detailed UML.
+    - Properly modularize the application into separate components, note the proposed file structure below.
+    - Implement the Context API to make some basic application settings available to components.
+        - Show three items by default.
+        - Hide completed items by default.
+        - Add the sort word ‘difficulty’ by default.
+    - Style the application using the Mantine Component API{target:_blank}.
+        - NOTE: The expectation to style this entire component in one day is likely unrealistic. The recommendation is to implement the required functionality, then systematically begin styling with Mantine. Match the comp image(s) as closely as possible. 80% of the design work will likely take 20% of your time. By the end of the week, being mostly there with style is the goal!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Links and Resources
 
-### `npm test`
+- [GitHub Actions ci/cd](https://github.com/Hcooper23/todo-app/actions/new)
+- [front-end application](https://codesandbox.io/p/github/Hcooper23/todo-app/main?workspaceId=d6b0a7b3-fc47-4e4d-b1fa-ce55109e7d9e)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Collaborators
 
-### `npm run build`
+### Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### `.env` requirements (where applicable)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### How to initialize/run your application (where applicable)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- e.g. `npm start`
 
-### `npm run eject`
+#### How to use your library (where applicable)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Features
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The consumption of the global state by components is facilitated by setting up a provider with context at the root index level of the app. This allows the context information established in the Todo component to be passed down to all components through the App component, enabling them to access and utilize the global state.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- The useForm() operation is utilized to handle form submission and the modification of input fields. This operation involves passing the initial state of the form as a parameter and returning the values and handleInputChange function, which can be employed within the form component to manage form data and input field changes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Tests
 
-## Learn More
+npm test
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### UML
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![UML](assets/Lab31.png)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
