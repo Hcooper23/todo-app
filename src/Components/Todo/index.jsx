@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
 
 import { v4 as uuid } from 'uuid';
+import List from '../List';
 
 const Todo = () => {
 
@@ -48,9 +49,7 @@ const Todo = () => {
 
   return (
     <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
-      </header>
+      <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
 
       {/* leave the form code inside of the Todo Component */}
       <form onSubmit={handleSubmit}>
@@ -77,15 +76,8 @@ const Todo = () => {
         </label>
       </form>
 
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
+      <List toggleComplete={toggleComplete} list={list} />
+
 
     </>
   );
