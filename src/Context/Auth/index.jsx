@@ -1,46 +1,74 @@
-import React, { createContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import testUsers from './lib/users';
+import jwt_decode from 'jwt-decode';
+import cookie from 'react-cookies';
 
-const AuthContext = createContext();
+export const AuthContext = React.createContext();
 
+// Provider for Auth state
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cookieToken = cookie.load('auth');
+    _validateToken(cookieToken);
+  }, []);
+
+  const _validateToken = (token) => {
+    try {
+      let validUser = jwt_decode(token);
+      console.log(validUser);
+      if (validUser) {
+        console.log(validUser);
+        cookie.save('auth', token);
+        setUser(validUser);
+        setIsLoggedIn(true);
+        console.log('user logged in');
+      }
+    } catch (error) {
+      setError(error);
+      console.log(error);
+    }
+  };
 
   const login = (username, password) => {
-    // Simulate login logic here
-    // You can replace this with your actual login implementation
-    setUser({ username, password });
-    setLoggedIn(true);
+    let user = testUsers[username];
+    if (user && user.password === password) {
+      try {
+        _validateToken(user.token);
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      }
+    }
   };
 
   const logout = () => {
-    // Simulate logout logic here
-    setUser(null);
-    setLoggedIn(false);
+    setUser({});
+    setIsLoggedIn(false);
+    cookie.remove('auth');
   };
 
-  const authorize = (capability) => {
-    // Simulate authorization logic here
-    // You can implement your own logic to check if the user has the capability
-    if (user && user.capabilities && user.capabilities.includes(capability)) {
-      return true;
-    }
-    return false;
+  const can = (capability) => {
+    return user?.capabilities?.includes(capability);
   };
 
-  const authContextValue = {
-    user,
+  const values = {
     isLoggedIn,
+    user,
+    error,
     login,
     logout,
-    authorize,
+    can,
   };
 
   return (
-    <AuthContext.Provider value={authContextValue}>
+    <AuthContext.Provider value={values}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export { AuthProvider, AuthContext };
+export default AuthProvider;
