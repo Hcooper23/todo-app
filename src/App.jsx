@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import Todo from './Components/Todo';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import Todo from './Components/Todo/index';
+import Header from './Components/Header/index';
+import Footer from './Components/Footer/index';
+import SettingsForm from './Components/SettingsForm/index';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { When } from 'react-if';
+import { AuthContext } from './Context/Auth/index';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <>
+function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+  return (
+    <>
+      <BrowserRouter>
         <Header />
-        <Todo />
+        <When condition={isLoggedIn}>
+          <Routes>
+            <Route path="/" element={<Todo />} />
+            <Route path="/settings" element={<SettingsForm />} />
+          </Routes>
+        </When>
         <Footer />
-      </>
-    );
-  }
+      </BrowserRouter>
+    </>
+  );
 }
+
+export default App;

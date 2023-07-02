@@ -1,36 +1,42 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../Context/Auth';
+import { Else, If, Then } from 'react-if';
+import { Button, TextInput } from '@mantine/core';
+
 
 function Login() {
+  const { login, logout, isLoggedIn } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Call the login function from the AuthContext or perform your login logic here
-    console.log('Logging in with username:', username, 'and password:', password);
+  const handleLogout = () => {
+    logout();
     setUsername('');
     setPassword('');
-  };
+  }
 
-  return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
+  return(
+    <>
+      <If condition={isLoggedIn}>
+        <Then>
+          <Button color='pink' onClick={handleLogout}>Log Out</Button>
+        </Then>
+        <Else>
+          <TextInput 
+          placeholder='Username'
           onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
+          />
+          <TextInput 
+          placeholder='Password'
+          type='password'
           onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+          />
+          <Button color='gray.8' onClick={() => login(username, password)}>Log In</Button>
+        </Else>
+
+      </If>
+    </>
+  )
 }
 
 export default Login;
