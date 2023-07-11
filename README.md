@@ -24,6 +24,8 @@ In Phase 3, we’d like to extend the functionality of the application by requir
 
 ### Setup
 
+run npm i for complete package.json 
+
 #### `.env` requirements (where applicable)
 
 #### How to initialize/run your application (where applicable)
@@ -45,5 +47,4 @@ npm test
 #### UML
 
 ![UML](assets/Lab31.png)
-![Todo Comp](./Screenshot%202023-06-29%20at%2011.14.01%20AM.png)
-![Settings Comp](./Screenshot%202023-06-29%20at%2011.14.13%20AM.png)
+

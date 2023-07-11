@@ -8,7 +8,7 @@ import { AuthContext } from '../../Context/Auth/index';
 function List({ list, toggleComplete, deleteItem }) {
   const { isLoggedIn, can } = useContext(AuthContext);
   const {
-    displayCount,
+    displayItems,
     showComplete,
     sort
   } = useContext(SettingsContext);
@@ -22,12 +22,12 @@ function List({ list, toggleComplete, deleteItem }) {
   // console.log('our renderable list', renderableList)
 
   // determine how many pages will be in our pagination component
-  const pageCount = Math.ceil(renderableList.length / displayCount);
+  const pageCount = Math.ceil(renderableList.length / displayItems);
 
   // where to start rendering display data
-  const listStart = displayCount * (activePage - 1);
+  const listStart = displayItems * (activePage - 1);
   // where to end (using slice)
-  const listEnd = listStart + displayCount;
+  const listEnd = listStart + displayItems;
 
   // list that is displayed for each pagination page
   const displayList = renderableList.slice(listStart, listEnd);

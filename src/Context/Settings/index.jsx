@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 export const SettingsContext = React.createContext();
 function SettingsProvider({ children }) {
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
   const [displayItems, setDisplayItems] = useState(3);
   const [sort, setSort] = useState("difficulty");
 
-  const storeLocal = () => {
+  const saveLocally = () => {
     localStorage.setItem(
       "todo",
-      JSON.stringify({ displayItems, showCompleted, sort })
+      JSON.stringify({ displayItems, showComplete, sort })
     );
   };
 
@@ -16,19 +16,19 @@ function SettingsProvider({ children }) {
     let storage = JSON.parse(localStorage.getItem("todo"));
     if (storage) {
       setDisplayItems(storage.displayItems);
-      setShowCompleted(storage.showCompleted);
+      setShowComplete(storage.showCompleted);
       setSort(storage.sort);
     }
   }, []);
 
   const values = {
-    showCompleted,
+    showComplete,
     displayItems,
     sort,
-    setShowCompleted,
+    setShowComplete,
     setDisplayItems,
     setSort,
-    storeLocal
+    saveLocally
   };
 
   return (
