@@ -21,7 +21,7 @@ function SettingsForm() {
   const { classes } = useStyles();
   const [show, setShow] = useState(false)
   const {
-    displayCount,
+    displayItems,
     showComplete,
     sort,
     setDisplayCount,
@@ -29,7 +29,7 @@ function SettingsForm() {
     setSort,
     saveLocally,
   } = useContext(SettingsContext);
-  console.log({ sort }, { showComplete }, { displayCount });
+  console.log({ sort }, { showComplete }, { displayItems });
   const handleSubmit = (e) => {
     e.preventDefault();
     saveLocally();
@@ -52,7 +52,7 @@ function SettingsForm() {
                 m="sm"
               />
               <NumberInput
-                value={displayCount}
+                value={displayItems}
                 label="Items Per Page"
                 onChange={setDisplayCount}
               />
@@ -72,7 +72,7 @@ function SettingsForm() {
                 <Text m="xl" fontSize="xl" weight="bold">Updated Settings</Text>
               </Card.Section>
               <Text m="sm">{showComplete ? 'Show' : 'Hide'} Completed Todos</Text>
-              <Text m="sm">Items Per Page: {displayCount}</Text>
+              <Text m="sm">Items Per Page: {displayItems}</Text>
               <Text m="sm">Sort Keyword: {sort}</Text>
             </Card>
           </When>

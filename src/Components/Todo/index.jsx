@@ -8,7 +8,7 @@ import Auth from '../Auth';
 
 const useStyles = createStyles((theme) => ({
   header: {
-    backgroundColor: theme.colors.light[4],
+    // backgroundColor: theme.colors.light[4],
     padding: theme.spacing.md,
     color: theme.colors.blue[0],
   }
@@ -98,7 +98,7 @@ const Todo = () => {
             </Paper>
           </div>
           <div>
-            <List list={list} toggleComplete={toggleComplete} />
+            <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
           </div>
         </SimpleGrid>
       </Container>
